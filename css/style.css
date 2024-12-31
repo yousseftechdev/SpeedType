@@ -1,126 +1,188 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
-:root{
-    --bgColor: #333;
-    --textPrimary: #fff;
-    --textSecondary: #666;
-    --primaryColor: #fd4;
-}
-html, body {
-    margin: 0;
-    height: 100%;
-}
-body{
-    font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(to bottom, var(--primaryColor), orange);
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow-y: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--textPrimary);
-    font-size: 1.4rem;
-}
-main{
-    background-color: var(--bgColor);
-    width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 20px;
-}
-h1{
-    color: var(--primaryColor);
-}
-h1 img{
-    width: 40px;
-}
-#header{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 20px 6px 30px;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap");
+:root {
+  --bgColor: #333;
+  --textPrimary: #fff;
+  --textSecondary: #666;
+  --primaryColor: #fd4;
 }
 
-#info{
-    margin-top: 10%;
-    text-align: center;
-    font-size: 30px;
-    color: var(--primaryColor);
+html,
+body {
+  margin: 0;
+  height: 100%;
 }
-button{
-    background: rgba(255,255,255,.2);
-    border:0;
-    color: rgba(255,255,255,.5);
-    padding: 5px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-image: linear-gradient(to bottom, var(--primaryColor), orange);
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--textPrimary);
+  font-size: 1.4rem;
 }
-div#game{
-    line-height:35px;
-    height:105px;
-    overflow: hidden;
-    position: relative;
+
+main {
+  background-color: var(--bgColor);
+  width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 20px;
 }
-div#game:focus{
-    outline:0;
+
+h1 {
+  color: var(--primaryColor);
 }
-#words{
-    filter: blur(5px);
-    color: var(--textSecondary);
+
+h1 img {
+  width: 40px;
 }
-#game:focus #words{
-    filter: blur(0);
+
+#header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px 6px 30px;
 }
+
+#info {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 30px;
+  color: var(--primaryColor);
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 0;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #fd4;
+  color: #000;
+  transform: translateY(-10px) scale(1.1);
+}
+
+button:active {
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-5px) scale(0.9);
+}
+
+div#game {
+  line-height: 35px;
+  height: 105px;
+  overflow: hidden;
+  position: relative;
+}
+
+div#game:focus {
+  outline: 0;
+}
+
+#words {
+  filter: blur(5px);
+  color: var(--textSecondary);
+}
+
+#game:focus #words {
+  filter: blur(0);
+}
+
 #focus-error {
-    position: absolute;
-    inset: 0;
-    text-align: center;
-    padding-top: 35px;
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  padding-top: 35px;
 }
-#game:focus #focus-error{
-    display:none;
+
+#game:focus #focus-error {
+  display: none;
 }
-div.word{
-    display: inline-block;
-    font-family: 'Roboto Mono', monospace;
-    margin: 0 5px;
+
+div.word {
+  display: inline-block;
+  font-family: "Roboto Mono", monospace;
+  margin: 0 5px;
 }
-.letter.correct{
-    color: #fff;
+
+.letter.correct {
+  color: #fff;
 }
-.letter.incorrect{
-    color: #f55;
+
+.letter.incorrect {
+  color: #f55;
 }
-@keyframes blink{
-    0%{
-        opacity: 1;
-    }
-    50%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
+
+#cursor {
+  display: none;
+  width: 2px;
+  height: 1.6rem;
+  background: var(--primaryColor);
+  position: fixed;
+  top: 198px;
+  left: 18px;
+  transition: all 0.1s;
+  animation: blink 0.4s infinite;
 }
-#cursor{
-    display:none;
-    width: 2px;
-    height: 1.6rem;
-    background: var(--primaryColor);
-    position: fixed;
-    top: 198px;
-    left: 18px;
-    animation: blink .3s infinite;
+
+#game:focus #cursor {
+  display: block;
 }
-#game:focus #cursor{
-    display: block;
+
+#game.over #words {
+  opacity: 0.5;
+  filter: blur(0px);
 }
-#game.over #words{
-    opacity: .5;
-    filter: blur(0px);
+
+#game.over:focus #cursor {
+  display: none;
 }
-#game.over:focus #cursor{
-    display:none;
-}
+
 #game.over #focus-error {
-    display: none;
+  display: none;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--primaryColor);
+  color: #000;
+}
+
+tr:nth-child(even) {
+  background-color: #444;
+}
+
+tr:hover {
+  background-color: #555;
 }
