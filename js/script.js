@@ -50,6 +50,12 @@ function saveResult(wpm) {
   const results = JSON.parse(localStorage.getItem('results')) || [];
   results.push({ wpm, date: new Date().toISOString() });
   localStorage.setItem('results', JSON.stringify(results));
+
+  const highScore = localStorage.getItem('highScore');
+  if (!highScore || wpm > highScore) {
+    localStorage.setItem('highScore', wpm);
+    updateHighScore();
+  }
 }
 
 function gameOver() {
@@ -58,6 +64,12 @@ function gameOver() {
   const result = getWpm();
   document.getElementById('info').innerHTML = `WPM: ${result}`;
   saveResult(result);
+}
+
+function updateHighScore() {
+  const highScore = localStorage.getItem('highScore');
+  const highScoreValue = highScore && !isNaN(highScore) && highScore > 0 ? highScore : 'not yet set';
+  document.getElementById('highScoreValue').textContent = highScoreValue;
 }
 
 document.getElementById('game').addEventListener('keyup', ev => {
@@ -165,6 +177,10 @@ document.getElementById('game').addEventListener('keyup', ev => {
 document.getElementById('newGameBtn').addEventListener('click', () => {
   gameOver();
   newGame();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateHighScore();
 });
 
 newGame();
