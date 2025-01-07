@@ -1,5 +1,8 @@
 # YType - A minimal type speed test
 
-## Change log:
+## Change log for this update:
 - Added: high score section
-- Fixed: bug where the text was hidden
+- Added: Key press sounds
+- Added: Custom time limit selection
+- Fixed: LOTS of bugs
+- Removed: Mobile support
