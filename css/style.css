@@ -81,9 +81,6 @@ div#game {
   height: 105px;
   overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 div#game:focus {
@@ -93,11 +90,6 @@ div#game:focus {
 #words {
   filter: blur(5px);
   color: var(--textSecondary);
-  margin: 0;
-  padding: 0;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 #game:focus #words {
